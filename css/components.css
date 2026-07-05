@@ -1,0 +1,1271 @@
+/* AI Food Waste Reduction Agent - Component Styles */
+
+/* 1. Dashboard Layout & Cards */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.metric-card-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.metric-card-value {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.metric-card-footer {
+  font-size: 0.78rem;
+}
+
+.text-emerald { color: var(--primary) !important; }
+.text-amber { color: var(--warning) !important; }
+.text-cyan { color: var(--info) !important; }
+.text-coral { color: var(--danger) !important; }
+
+/* Expiry Alerts Banner */
+.alert-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.1));
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.alert-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.alert-banner-icon {
+  color: var(--danger);
+  animation: pulse-slow 2s infinite;
+}
+
+/* Dashboard Columns Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 991px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dashboard-card-title {
+  font-size: 1.15rem;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.dashboard-alert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard-alert-item:last-child {
+  border-bottom: none;
+}
+
+.alert-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 12px;
+  display: inline-block;
+}
+
+.bg-danger { background-color: var(--danger); }
+.bg-warning { background-color: var(--warning); }
+.bg-success { background-color: var(--primary); }
+
+/* Quick Action AI buttons */
+.quick-prompts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quick-chat-prompt {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 12px;
+  text-align: left;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.quick-chat-prompt:hover {
+  background: var(--primary-glow);
+  color: var(--primary);
+  border-color: rgba(16, 185, 129, 0.25);
+  transform: translateX(4px);
+}
+
+/* 2. Pantry Card grid styling */
+.pantry-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pantry-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pantry-filter-tab, .recipe-filter-tab, .guide-filter-tab {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+}
+
+.pantry-filter-tab.active, .recipe-filter-tab.active, .guide-filter-tab.active {
+  background-color: var(--primary-glow);
+  color: var(--primary);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.pantry-search-box {
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0 12px;
+  flex-grow: 1;
+  max-width: 400px;
+}
+
+.pantry-search-box input {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 10px 8px;
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.pantry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.pantry-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pantry-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pantry-card-title {
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+  color: var(--text-primary);
+}
+
+.pantry-card-cat {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.expiry-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.badge-fresh { background-color: rgba(16, 185, 129, 0.1); color: var(--primary); }
+.badge-expiring-soon { background-color: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.badge-expiring-today { background-color: rgba(239, 68, 68, 0.1); color: var(--danger); }
+.badge-expired { background-color: rgba(100, 116, 139, 0.1); color: var(--text-secondary); }
+
+.pantry-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.qty-control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.qty-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.qty-btn-group {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.qty-adjust-btn {
+  background: none;
+  color: var(--text-primary);
+  width: 28px;
+  height: 28px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+}
+
+.qty-adjust-btn:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.qty-value {
+  padding: 0 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.pantry-card-tip {
+  display: flex;
+  gap: 8px;
+  background-color: rgba(6, 182, 212, 0.05);
+  border: 1px solid rgba(6, 182, 212, 0.1);
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  color: #a5f3fc;
+}
+
+.tip-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.pantry-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: auto;
+}
+
+/* Empty State visualizer */
+.empty-state {
+  text-align: center;
+  padding: 48px;
+  grid-column: 1 / -1;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+}
+
+/* 3. AI Scanner Sub-tabs layout */
+.modal-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.modal-tab-btn {
+  flex: 1;
+  background: none;
+  color: var(--text-secondary);
+  padding: 12px;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  font-size: 0.9rem;
+}
+
+.modal-tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.modal-tab-panel {
+  display: none;
+}
+
+.modal-tab-panel.active {
+  display: block;
+}
+
+/* Receipt Scanner Simulation UI */
+.scanner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .scanner-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.receipt-frame {
+  background: #111;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+.receipt-paper {
+  background: #f8fafc;
+  color: #0f172a;
+  width: 100%;
+  max-width: 260px;
+  min-height: 280px;
+  padding: 16px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  position: relative;
+  transition: all var(--transition-normal);
+}
+
+.ocr-text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ocr-text-line {
+  position: absolute;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: transparent;
+  font-size: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+
+.ocr-text-line.recognized {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--primary);
+}
+
+/* Laser Scanner Bar Animation */
+.receipt-paper.scanning::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary);
+  box-shadow: 0 0 12px var(--primary);
+  animation: laser-scan 2.4s linear infinite;
+  z-index: 10;
+}
+
+.receipt-paper.scanned {
+  filter: brightness(0.85);
+  border: 2px solid var(--primary);
+}
+
+@keyframes laser-scan {
+  0% { top: 0%; }
+  50% { top: 100%; }
+  100% { top: 0%; }
+}
+
+.scanner-progress-bar {
+  background: rgba(255, 255, 255, 0.05);
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scanner-progress-fill {
+  background: linear-gradient(to right, var(--primary), var(--info));
+  height: 100%;
+  width: 50%;
+  animation: scan-load 1.2s infinite ease-in-out;
+}
+
+@keyframes scan-load {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* Photo Recognition Simulator */
+.photo-frame {
+  background: #111;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-preview-placeholder {
+  width: 100%;
+  max-width: 320px;
+  height: 240px;
+  border-radius: 8px;
+  display: none;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.basket-bg {
+  background: linear-gradient(135deg, #3b2314, #1a0f08);
+  border: 2px solid #5c3a21;
+}
+
+.fridge-bg {
+  background: linear-gradient(135deg, #0e1e38, #050b14);
+  border: 2px solid #1e3a68;
+}
+
+.photo-preview-placeholder::before {
+  content: "CAMERA ACTIVE";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: red;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  animation: blink-fast 1s infinite;
+}
+
+.bounding-box {
+  position: absolute;
+  border: 2px solid var(--primary);
+  background: rgba(16, 185, 129, 0.1);
+  box-shadow: 0 0 8px var(--primary);
+  pointer-events: none;
+}
+
+.box-label {
+  position: absolute;
+  top: -20px;
+  left: -2px;
+  background-color: var(--primary);
+  color: #000;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px 3px 0 0;
+  white-space: nowrap;
+}
+
+@keyframes blink-fast {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* 4. Recipe suggestions cards */
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+.recipe-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.recipe-header {
+  padding: 16px 16px 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recipe-category-tag {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.recipe-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.recipe-badge-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.badge-warning { background-color: var(--warning); color: #000; }
+.badge-success { background-color: var(--primary); color: #000; }
+.badge-info { background-color: var(--info); color: #000; }
+
+.recipe-content {
+  padding: 8px 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.recipe-title {
+  font-size: 1.25rem;
+}
+
+.recipe-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.recipe-stats {
+  display: flex;
+  gap: 14px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.recipe-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.recipe-stats span i {
+  width: 14px;
+  height: 14px;
+}
+
+.recipe-ingredients-summary {
+  margin-top: 6px;
+}
+
+.recipe-ingredients-summary h5 {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.ingredient-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.ingredient-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-owned { background-color: var(--primary); box-shadow: 0 0 6px var(--primary); }
+.dot-missing-required { background-color: var(--danger); }
+.dot-missing-optional { background-color: var(--text-muted); }
+
+.recipe-actions {
+  padding: 0 16px 16px 16px;
+}
+
+/* Detailed Recipe Modal Lists */
+.recipe-ing-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.recipe-ing-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+
+.ing-status-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.ing-owned { border-left: 3px solid var(--primary); }
+.ing-owned .ing-status-icon { color: var(--primary); }
+.ing-low { border-left: 3px solid var(--warning); }
+.ing-low .ing-status-icon { color: var(--warning); }
+.ing-missing { border-left: 3px solid var(--danger); }
+.ing-missing .ing-status-icon { color: var(--danger); }
+
+.ing-note {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.recipe-steps-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.recipe-step-item {
+  display: flex;
+  gap: 14px;
+}
+
+.step-num {
+  background-color: var(--primary-glow);
+  color: var(--primary);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.step-text {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* 5. Smart Shopping List Row Styling */
+.shopping-list-container {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.shopping-item-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: all var(--transition-fast);
+}
+
+.shopping-item-row:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.shopping-item-row.checked {
+  opacity: 0.5;
+  border-color: transparent;
+}
+
+.shopping-item-row.checked .shopping-item-name {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.shopping-item-checkbox-container {
+  display: block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.shopping-item-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  transition: all var(--transition-fast);
+}
+
+.shopping-item-checkbox-container:hover input ~ .custom-checkbox {
+  border-color: var(--primary);
+}
+
+.shopping-item-checkbox-container input:checked ~ .custom-checkbox {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.custom-checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.shopping-item-checkbox-container input:checked ~ .custom-checkbox:after {
+  display: block;
+}
+
+.shopping-item-checkbox-container .custom-checkbox:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.shopping-item-details {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.shopping-item-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.shopping-item-qty {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.shopping-item-badge {
+  font-size: 0.7rem;
+  background-color: var(--primary-glow);
+  color: var(--primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-icon {
+  width: 10px;
+  height: 10px;
+}
+
+.shopping-item-delete-btn {
+  background: none;
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.shopping-item-delete-btn:hover {
+  color: var(--danger);
+  background-color: var(--danger-glow);
+}
+
+/* 6. Chatbot interface layout */
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: 520px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 16px 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-avatar {
+  background: linear-gradient(135deg, var(--primary), var(--info));
+  color: #000;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.chat-title-text {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.chat-status-text {
+  font-size: 0.72rem;
+  color: var(--primary);
+  display: block;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-bubble-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  position: relative;
+}
+
+.chat-bubble-time {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  display: block;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.chat-bot {
+  justify-content: flex-start;
+}
+
+.chat-bot .chat-bubble {
+  background-color: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border-bottom-left-radius: 2px;
+  border: 1px solid var(--border-color);
+}
+
+.chat-user {
+  justify-content: flex-end;
+}
+
+.chat-user .chat-bubble {
+  background-color: var(--primary-glow);
+  color: var(--text-primary);
+  border-bottom-right-radius: 2px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.chat-input-area {
+  padding: 16px;
+  border-top: 1px solid var(--border-color);
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  gap: 12px;
+}
+
+.chat-input-area input {
+  flex-grow: 1;
+}
+
+/* Typing indicator dots */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.typing-indicator span {
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-secondary);
+  border-radius: 50%;
+  animation: typing-bounce 1s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* 7. WasteShare community cards */
+.share-feed-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.share-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.share-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.share-user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.share-avatar {
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.05);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-donor-name {
+  font-size: 0.85rem;
+}
+
+.share-time {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.share-distance-tag {
+  background-color: rgba(6, 182, 212, 0.1);
+  color: var(--info);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.share-card-body {
+  flex-grow: 1;
+}
+
+.share-item-name {
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+}
+
+.share-notes {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.share-expiry-indicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.share-expiry-indicator i {
+  width: 12px;
+  height: 12px;
+}
+
+/* 8. Storage guide and tips cards */
+.storage-guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.storage-guide-item {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 18px;
+}
+
+.guide-item-title {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.guide-item-cat {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.guide-zone-badge {
+  background-color: rgba(99, 102, 241, 0.1);
+  color: #a5b4fc;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.guide-lifespan-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.guide-lifespan-info i {
+  width: 14px;
+  height: 14px;
+}
+
+.guide-item-tips {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  border-top: 1px dashed var(--border-color);
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+/* 9. Analytics Badges Grid & Charts layout */
+.analytics-dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .analytics-dashboard {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-wrapper {
+  position: relative;
+  height: 240px;
+  width: 100%;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.badge-card {
+  background-color: rgba(30, 41, 59, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition-normal);
+}
+
+.badge-card.unlocked {
+  border-color: rgba(16, 185, 129, 0.25);
+  background-color: rgba(16, 185, 129, 0.02);
+}
+
+.badge-card.locked {
+  opacity: 0.5;
+}
+
+.badge-icon-wrap {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-icon-wrap i {
+  width: 22px;
+  height: 22px;
+}
+
+.badge-card.locked .badge-icon-wrap {
+  color: var(--text-muted);
+}
+
+.badge-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.badge-desc {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.badge-status-tag {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+
+.unlocked .badge-status-tag {
+  background-color: var(--primary-glow);
+  color: var(--primary);
+}
+
+.locked .badge-status-tag {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+.bg-dark-success {
+  background-color: rgba(16, 185, 129, 0.04) !important;
+}
+
+.bg-dark-card {
+  background-color: rgba(30, 41, 59, 0.25) !important;
+}
+
+.progress-sm {
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+/* Animations */
+@keyframes pulse-slow {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.7; }
+}
+
+@keyframes laser-scan {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+.animate-box-in {
+  animation: scale-up 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes scale-up {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}

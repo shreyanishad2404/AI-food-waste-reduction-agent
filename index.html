@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Food Waste Reduction Agent</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <!-- Chart.js and Lucide Icons via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- App Structure -->
+  <div class="app-container">
+    
+    <!-- Mobile Sticky Header -->
+    <header class="mobile-header">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon">
+          <i data-lucide="sprout"></i>
+        </div>
+        <span class="brand-name">ZeroWaste AI</span>
+      </div>
+      <button class="hamburger-btn" id="mobile-menu-toggle">
+        <i data-lucide="menu"></i>
+      </button>
+    </header>
+
+    <!-- App Sidebar Drawer (Desktop Left / Mobile Drawer) -->
+    <aside class="app-sidebar">
+      <div class="brand-wrapper">
+        <div class="brand-logo-icon">
+          <i data-lucide="sprout"></i>
+        </div>
+        <span class="brand-name">ZeroWaste AI</span>
+      </div>
+
+      <!-- Navigation links -->
+      <nav class="sidebar-nav">
+        <ul class="nav-menu">
+          <li>
+            <a href="#" class="nav-link active" data-tab="dashboard">
+              <i data-lucide="layout-dashboard"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-tab="pantry">
+              <i data-lucide="refrigerator"></i>
+              <span>Pantry Inventory</span>
+              <span class="nav-badge" id="nav-pantry-badge" style="display: none;">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-tab="recipes">
+              <i data-lucide="cooking-pot"></i>
+              <span>AI Recipes</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-tab="shopping">
+              <i data-lucide="shopping-cart"></i>
+              <span>Smart Shopping</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-tab="chat">
+              <i data-lucide="message-square-code"></i>
+              <span>AI Chef Chat</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-tab="share">
+              <i data-lucide="share-2"></i>
+              <span>WasteShare</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-tab="tips">
+              <i data-lucide="book-open"></i>
+              <span>Storage Tips</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-tab="analytics">
+              <i data-lucide="line-chart"></i>
+              <span>Eco Analytics</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Footer (Profile Level) -->
+      <div class="app-sidebar-footer">
+        <div class="user-sidebar-profile">
+          <div class="user-avatar-wrap">🌱</div>
+          <div class="user-details">
+            <span class="user-name">ZeroWaste Ally</span>
+            <span class="user-level-badge" id="user-level-badge">Lvl 1</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Dynamic Contents Area -->
+    <main class="app-content">
+
+      <!-- SECTION 1: DASHBOARD -->
+      <section id="tab-dashboard" class="app-section active">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-subtitle">Welcome back! Here is your food preservation summary.</p>
+          </div>
+          <button class="btn btn-primary" id="btn-open-add-modal">
+            <i data-lucide="plus-circle"></i> Add Ingredient
+          </button>
+        </div>
+
+        <!-- Expiry Alerts Banner (Conditional display) -->
+        <div class="alert-banner" id="dashboard-alert-banner" style="display: none;">
+          <div class="alert-banner-content">
+            <i data-lucide="alert-triangle" class="alert-banner-icon"></i>
+            <span id="dashboard-alert-count-text">3 items are expiring soon! Rescue them.</span>
+          </div>
+          <button class="btn btn-sm btn-secondary" id="btn-alert-banner-cook">
+            View Recipes
+          </button>
+        </div>
+
+        <!-- Sustainability Stats Summary Cards -->
+        <div class="metrics-row">
+          <div class="glass-panel metric-card">
+            <div class="metric-card-header">
+              <span>Total Savings</span>
+              <i data-lucide="dollar-sign" class="metric-card-icon text-emerald"></i>
+            </div>
+            <div class="metric-card-value text-emerald" id="analytics-saved-money">$0.00</div>
+            <div class="metric-card-footer text-muted">From consumed/rescued items</div>
+          </div>
+          <div class="glass-panel metric-card">
+            <div class="metric-card-header">
+              <span>Food Waste Prevented</span>
+              <i data-lucide="scale" class="metric-card-icon text-cyan"></i>
+            </div>
+            <div class="metric-card-value text-cyan" id="analytics-saved-weight">0.0 kg</div>
+            <div class="metric-card-footer text-muted">Weight of food eaten</div>
+          </div>
+          <div class="glass-panel metric-card">
+            <div class="metric-card-header">
+              <span>Carbon Prevented</span>
+              <i data-lucide="leaf" class="metric-card-icon text-emerald"></i>
+            </div>
+            <div class="metric-card-value" style="color: #a7f3d0;" id="analytics-co2-saved">0 kg</div>
+            <div class="metric-card-footer text-muted">CO₂ equivalent emissions avoided</div>
+          </div>
+          <div class="glass-panel metric-card">
+            <div class="metric-card-header">
+              <span>Water Saved</span>
+              <i data-lucide="droplet" class="metric-card-icon text-info"></i>
+            </div>
+            <div class="metric-card-value text-info" id="analytics-water-saved">0 L</div>
+            <div class="metric-card-footer text-muted">Embed resource equivalent</div>
+          </div>
+        </div>
+
+        <!-- Two Columns Dashboard Layout -->
+        <div class="dashboard-grid">
+          
+          <!-- Column 1: Expiry checklist and Quests -->
+          <div class="d-flex flex-column gap-4">
+            
+            <!-- Soon to Expire Panel -->
+            <div class="glass-panel">
+              <h3 class="dashboard-card-title">
+                <i data-lucide="clock" class="text-amber"></i> Expiry Tracker
+              </h3>
+              <div id="dashboard-alerts-list">
+                <!-- Seeding dynamic alerts list -->
+              </div>
+            </div>
+
+            <!-- Gamification Level Summary -->
+            <div class="glass-panel">
+              <h3 class="dashboard-card-title">
+                <i data-lucide="award" class="text-cyan"></i> Sustainable Achievements
+              </h3>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div>
+                  <h4 id="user-level-title" class="mb-0 text-light">Kitchen Novice</h4>
+                  <span class="small text-muted">Earn XP by cooking and completing quests</span>
+                </div>
+                <div class="h3 font-weight-bold text-emerald mb-0" id="user-xp-text">0 / 500 XP</div>
+              </div>
+              <div class="progress bg-dark" style="height: 12px; border-radius: 6px; overflow: hidden;">
+                <div class="progress-bar bg-success progress-bar-striped" id="user-xp-progress-bar" style="width: 0%"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Column 2: Quick Chef AI Chatprompts -->
+          <div>
+            <div class="glass-panel h-100">
+              <h3 class="dashboard-card-title">
+                <i data-lucide="brain-circuit" class="text-emerald"></i> AI Chef Assistant
+              </h3>
+              <p class="small text-secondary mb-4">Chef Zero-Waste is ready to advise you. Tap a prompt below or head to the Chef tab to ask details.</p>
+              
+              <div class="quick-prompts-grid">
+                <button class="quick-chat-prompt" data-prompt="What can I cook with the ingredients expiring soonest in my pantry?">
+                  🍳 "Find a dinner recipe using expiring items"
+                </button>
+                <button class="quick-chat-prompt" data-prompt="How do I store cilantro so it doesn't rot in two days?">
+                  🌿 "How do I store leafy green herbs?"
+                </button>
+                <button class="quick-chat-prompt" data-prompt="I have bananas and bread that are going stale, what can I bake?">
+                  🍌 "I have stale bread and brown bananas"
+                </button>
+                <button class="quick-chat-prompt" data-prompt="Show me which items are currently expiring in my pantry.">
+                  ⚠️ "What is expiring next?"
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 2: PANTRY INVENTORY -->
+      <section id="tab-pantry" class="app-section">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Pantry Inventory</h1>
+            <p class="page-subtitle">Manage your ingredients, check shelf life, and record food consumed.</p>
+          </div>
+        </div>
+
+        <div class="glass-panel pantry-header-controls">
+          <!-- Filters tabs -->
+          <div class="pantry-filters">
+            <button class="pantry-filter-tab active" data-filter="all">All Items</button>
+            <button class="pantry-filter-tab" data-filter="fresh">Fresh</button>
+            <button class="pantry-filter-tab" data-filter="expiring">Expiring Soon</button>
+            <button class="pantry-filter-tab" data-filter="expired">Expired</button>
+          </div>
+
+          <!-- Search & Select -->
+          <div class="d-flex gap-2 align-items-center w-100-mobile">
+            <select class="form-control" id="pantry-category-select" style="max-width: 150px;">
+              <option value="all">All Categories</option>
+              <option value="Vegetables">Vegetables</option>
+              <option value="Fruits">Fruits</option>
+              <option value="Dairy">Dairy</option>
+              <option value="Meat/Seafood">Meat/Seafood</option>
+              <option value="Grains/Pantry">Grains/Pantry</option>
+              <option value="Others">Others</option>
+            </select>
+            
+            <div class="pantry-search-box">
+              <i data-lucide="search" class="text-secondary" style="width: 18px; height: 18px;"></i>
+              <input type="text" id="pantry-search" placeholder="Search ingredients...">
+            </div>
+          </div>
+        </div>
+
+        <!-- Pantry Items Grid -->
+        <div class="pantry-grid" id="pantry-grid">
+          <!-- Seeded Pantry Cards loaded by pantry.js -->
+        </div>
+      </section>
+
+      <!-- SECTION 3: AI RECIPES -->
+      <section id="tab-recipes" class="app-section">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">AI Recipe Generator</h1>
+            <p class="page-subtitle">Smart recipes based on matching ingredients you already have.</p>
+          </div>
+        </div>
+
+        <div class="glass-panel pantry-header-controls">
+          <div class="pantry-filters">
+            <button class="recipe-filter-tab active" data-category="all">All Recipes</button>
+            <button class="recipe-filter-tab" data-category="Breakfast">Breakfast</button>
+            <button class="recipe-filter-tab" data-category="Lunch">Lunch</button>
+            <button class="recipe-filter-tab" data-category="Dinner">Dinner</button>
+            <button class="recipe-filter-tab" data-category="Sauce">Sauces/Other</button>
+          </div>
+          
+          <div class="pantry-search-box">
+            <i data-lucide="search" class="text-secondary" style="width: 18px; height: 18px;"></i>
+            <input type="text" id="recipe-search" placeholder="Search recipes or ingredients...">
+          </div>
+        </div>
+
+        <!-- Recipes Grid -->
+        <div class="recipes-grid" id="recipes-grid">
+          <!-- Seeded Recipe Cards loaded by recipes.js -->
+        </div>
+      </section>
+
+      <!-- SECTION 4: SMART SHOPPING LIST -->
+      <section id="tab-shopping" class="app-section">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Smart Shopping List</h1>
+            <p class="page-subtitle">Auto-generates missing ingredients and allows stocking back directly to pantry.</p>
+          </div>
+        </div>
+
+        <div class="shopping-list-container">
+          <div class="glass-panel mb-4">
+            <h3 class="dashboard-card-title">
+              <i data-lucide="sparkles" class="text-emerald"></i> Quick Controls
+            </h3>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary flex-grow-1" id="btn-auto-generate-shopping">
+                <i data-lucide="cpu"></i> AI Auto-Generate List
+              </button>
+              <button class="btn btn-success" id="btn-import-shopping-pantry" disabled>
+                <i data-lucide="archive-restore"></i> Import Checked to Pantry
+              </button>
+              <button class="btn btn-secondary" id="btn-clear-completed-shopping" disabled>
+                Clear Checked
+              </button>
+            </div>
+          </div>
+
+          <!-- Add Item manually Form -->
+          <div class="glass-panel mb-4">
+            <form id="shopping-add-form" class="row">
+              <div class="col-md-6 form-group mb-0">
+                <input type="text" class="form-control" id="shopping-name" placeholder="Item name (e.g. Milk)" required>
+              </div>
+              <div class="col-md-2 form-group mb-0">
+                <input type="number" class="form-control" id="shopping-qty" placeholder="Qty" min="1" step="any" required>
+              </div>
+              <div class="col-md-2 form-group mb-0">
+                <select class="form-control" id="shopping-unit">
+                  <option value="pcs">pcs</option>
+                  <option value="pack">pack</option>
+                  <option value="gallon">gallon</option>
+                  <option value="dozen">dozen</option>
+                  <option value="slices">slices</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-primary btn-block">Add</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Shopping List Items Container -->
+          <div class="shopping-items-list" id="shopping-list-items">
+            <!-- Loaded dynamically by shopping.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: AI CHEF ASSISTANT CHATBOT -->
+      <section id="tab-chat" class="app-section">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">AI Chef Assistant</h1>
+            <p class="page-subtitle">Chat with "Chef Zero-Waste" for food rescue recipes, custom storage hacks, and hacks.</p>
+          </div>
+        </div>
+
+        <div class="chat-window glass-panel">
+          <div class="chat-header">
+            <div class="chat-avatar">🧑‍🍳</div>
+            <div>
+              <span class="chat-title-text">Chef Zero-Waste</span>
+              <span class="chat-status-text">● Online AI Guide</span>
+            </div>
+          </div>
+          
+          <div class="chat-messages" id="chat-messages-container">
+            <!-- Chat logs updated dynamically by chatbot.js -->
+          </div>
+          
+          <div class="chat-input-area">
+            <input type="text" class="form-control" id="chat-input" placeholder="Ask chef anything (e.g. 'How do I freeze tomatoes?', 'recipe for cheese and spinach')">
+            <button class="btn btn-primary" id="chat-send-btn">
+              <i data-lucide="send"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6: WASTESHARE COMMUNITY FEED -->
+      <section id="tab-share" class="app-section">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">WasteShare Food Sharing</h1>
+            <p class="page-subtitle">Give away excess ingredients to your neighbors or request local food surplus nearby.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          
+          <!-- Column 1: Active Listings Feed -->
+          <div>
+            <h3 class="dashboard-card-title"><i data-lucide="map-pin" class="text-cyan"></i> Nearby Food Rescues</h3>
+            <div class="share-feed-grid" id="share-feed-container">
+              <!-- Loaded by share.js -->
+            </div>
+          </div>
+
+          <!-- Column 2: Share form -->
+          <div>
+            <div class="glass-panel h-100">
+              <h3 class="dashboard-card-title"><i data-lucide="plus-circle" class="text-emerald"></i> Share Your Surplus</h3>
+              <p class="small text-secondary mb-3">Add items you cannot finish before they spoil. Neighbors can reserve them.</p>
+              
+              <form id="share-item-form">
+                <div class="form-group">
+                  <label class="form-label" for="share-name">Food Ingredient Name</label>
+                  <input type="text" class="form-control" id="share-name" placeholder="e.g. 5 Organic Oranges" required>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="share-category">Category</label>
+                  <select class="form-control" id="share-category">
+                    <option value="Fruits">Fruits</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Meat/Seafood">Meat/Seafood</option>
+                    <option value="Grains/Pantry">Grains/Pantry</option>
+                    <option value="Others" selected>Others</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="share-expiry-days">Spoils In (Estimated Days)</label>
+                  <input type="number" class="form-control" id="share-expiry-days" value="4" min="1" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="share-notes">Pickup Details / Notes</label>
+                  <textarea class="form-control" id="share-notes" rows="3" placeholder="e.g. Unopened container, leaving on porch for quick contactless pickup." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">List Surplus Item</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 7: STORAGE TIPS -->
+      <section id="tab-tips" class="app-section">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Storage & Preservation Guide</h1>
+            <p class="page-subtitle">Search how to store major ingredients properly to double their shelf life.</p>
+          </div>
+        </div>
+
+        <div class="glass-panel pantry-header-controls">
+          <div class="pantry-filters">
+            <button class="guide-filter-tab active" data-zone="all">All Zones</button>
+            <button class="guide-filter-tab" data-zone="Fridge">Fridge</button>
+            <button class="guide-filter-tab" data-zone="Counter">Countertop</button>
+            <button class="guide-filter-tab" data-zone="Pantry">Dark Pantry</button>
+          </div>
+          
+          <div class="pantry-search-box">
+            <i data-lucide="search" class="text-secondary" style="width: 18px; height: 18px;"></i>
+            <input type="text" id="storage-guide-search" placeholder="Search storage guides (e.g. Banana, Potato)...">
+          </div>
+        </div>
+
+        <!-- Storage tips list -->
+        <div class="storage-guide-grid" id="storage-guide-list">
+          <!-- Populated by app.js from MOCK_STORAGE_GUIDE -->
+        </div>
+      </section>
+
+      <!-- SECTION 8: SUSTAINABILITY ANALYTICS -->
+      <section id="tab-analytics" class="app-section">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Sustainability Analytics</h1>
+            <p class="page-subtitle">Check your impact logs, money saved, waste metrics, and gamified achievements.</p>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="analytics-dashboard">
+          
+          <!-- Chart 1: Saved vs Wasted Value -->
+          <div class="glass-panel">
+            <h3 class="dashboard-card-title"><i data-lucide="bar-chart-3" class="text-emerald"></i> Savings vs Waste Trends ($)</h3>
+            <div class="chart-wrapper">
+              <canvas id="chart-savings-waste"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 2: Rescued Category breakdown -->
+          <div class="glass-panel">
+            <h3 class="dashboard-card-title"><i data-lucide="pie-chart" class="text-cyan"></i> Rescued Category Distribution (kg)</h3>
+            <div class="chart-wrapper">
+              <canvas id="chart-category-breakdown"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quest Checklist and Badges panel -->
+        <div class="dashboard-grid mt-4">
+          <!-- Active Quest checklist -->
+          <div>
+            <div class="glass-panel">
+              <h3 class="dashboard-card-title"><i data-lucide="hourglass" class="text-warning"></i> Active Eco Quests</h3>
+              <div id="challenges-list">
+                <!-- Seeding dynamic challenge boxes -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Unlocked Badges shelf -->
+          <div>
+            <div class="glass-panel h-100">
+              <h3 class="dashboard-card-title"><i data-lucide="trophy" class="text-emerald"></i> Unlocked Badges</h3>
+              <div class="badges-grid" id="badges-grid">
+                <!-- Badge cards rendered by analytics.js -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Control Footer -->
+        <div class="glass-panel text-center mt-4 border-danger">
+          <h4 class="text-danger mb-2">Reset Application Settings</h4>
+          <p class="small text-secondary mb-3">Clears all pantry entries, shopping lists, and logs to reset default mockup database values.</p>
+          <button class="btn btn-sm btn-danger" id="btn-reset-app-data">Reset App Storage</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL 1: ADD PANTRY ITEM (Includes simulations for receipt/photo) -->
+  <div class="modal-overlay" id="add-item-modal">
+    <div class="modal-content" style="max-width: 700px;">
+      <div class="modal-header">
+        <h3 class="mb-0 text-light"><i data-lucide="package-plus" class="text-emerald" style="width: 24px; height: 24px; vertical-align: middle; margin-right: 6px;"></i> Add Ingredients</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      
+      <!-- Sub-tabs within Modal -->
+      <div class="modal-tabs">
+        <button class="modal-tab-btn active" data-panel="manual">Manual Form</button>
+        <button class="modal-tab-btn" data-panel="receipt">Scan Receipt (OCR)</button>
+        <button class="modal-tab-btn" data-panel="photo">Scan Food Photo</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Tab Panel A: Manual Add -->
+        <div class="modal-tab-panel active" id="panel-manual">
+          <form id="manual-add-form">
+            <div class="form-group">
+              <label class="form-label" for="manual-name">Ingredient Name</label>
+              <input type="text" class="form-control" id="manual-name" placeholder="e.g. Organic Avocados" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="manual-category">Category</label>
+                <select class="form-control" id="manual-category">
+                  <option value="Vegetables">Vegetables</option>
+                  <option value="Fruits" selected>Fruits</option>
+                  <option value="Dairy">Dairy</option>
+                  <option value="Meat/Seafood">Meat/Seafood</option>
+                  <option value="Grains/Pantry">Grains/Pantry</option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="manual-qty">Quantity</label>
+                <div class="d-flex gap-2">
+                  <input type="number" class="form-control" id="manual-qty" value="1" min="0.1" step="any" required>
+                  <select class="form-control" id="manual-unit" style="max-width: 100px;">
+                    <option value="pcs" selected>pcs</option>
+                    <option value="pack">pack</option>
+                    <option value="gallon">gallon</option>
+                    <option value="dozen">dozen</option>
+                    <option value="slices">slices</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="manual-expiry">Expiry Date</label>
+              <input type="date" class="form-control" id="manual-expiry" required>
+            </div>
+
+            <div class="modal-footer px-0 pb-0 border-0">
+              <button type="button" class="btn btn-secondary modal-cancel">Cancel</button>
+              <button type="submit" class="btn btn-primary">Add to Pantry</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Tab Panel B: Receipt OCR Scanning Simulator -->
+        <div class="modal-tab-panel" id="panel-receipt">
+          <p class="small text-secondary mb-3">Upload your shopping receipt. The AI model extracts item names and populates expiry dates automatically.</p>
+          
+          <!-- Sample selectors -->
+          <div class="mb-3 d-flex align-items-center gap-2">
+            <span class="small text-muted">Test Receipts:</span>
+            <button class="btn btn-xs btn-secondary receipt-sample-btn" data-receipt-id="receipt1">Scan Trader Joe's Receipt</button>
+            <button class="btn btn-xs btn-secondary receipt-sample-btn" data-receipt-id="receipt2">Scan Whole Foods Receipt</button>
+          </div>
+
+          <div class="scanner-grid">
+            <!-- Simulated raw scanning paper -->
+            <div class="receipt-frame">
+              <div class="receipt-paper" id="receipt-paper">
+                <div style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 80px;">
+                  SELECT SAMPLE<br>RECEIPT ABOVE
+                </div>
+                <!-- Dynamic text lines -->
+                <div class="ocr-text-overlay" id="receipt-ocr-content"></div>
+              </div>
+            </div>
+
+            <!-- Scanning Status panel -->
+            <div class="d-flex flex-column gap-3 justify-content-center">
+              <div class="p-3 bg-dark rounded border border-secondary text-center" id="receipt-scan-progress" style="display: none;">
+                <div class="spinner-border text-primary mb-2" role="status"></div>
+                <div class="small text-light" id="receipt-scan-status">Analyzing text structure...</div>
+                <div class="scanner-progress-bar mt-2">
+                  <div class="scanner-progress-fill"></div>
+                </div>
+              </div>
+
+              <div id="receipt-scanned-items">
+                <!-- Items list shows after OCR matches -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Panel C: Photo Object Recognition Simulator -->
+        <div class="modal-tab-panel" id="panel-photo">
+          <p class="small text-secondary mb-3">Snap a photo of your fridge shelf or fruit basket. AI bounding boxes identify and count ingredients.</p>
+          
+          <div class="mb-3 d-flex align-items-center gap-2">
+            <span class="small text-muted">Test Images:</span>
+            <button class="btn btn-xs btn-secondary photo-sample-btn" data-photo-id="photo1">Scan Fruit Basket Basket</button>
+            <button class="btn btn-xs btn-secondary photo-sample-btn" data-photo-id="photo2">Scan Fridge Shelf Camera</button>
+          </div>
+
+          <div class="scanner-grid">
+            <!-- Bounding Box Preview -->
+            <div class="photo-frame">
+              <div class="photo-preview-placeholder" id="photo-scanner-preview">
+                <!-- Bounding boxes absolute nodes overlay -->
+                <div class="ocr-text-overlay" id="photo-recognition-overlay"></div>
+              </div>
+            </div>
+
+            <!-- Photo parsing status -->
+            <div class="d-flex flex-column gap-3 justify-content-center">
+              <div class="p-3 bg-dark rounded border border-secondary text-center" id="photo-scan-progress" style="display: none;">
+                <div class="spinner-border text-primary mb-2"></div>
+                <div class="small text-light" id="photo-scan-status">Detecting outlines...</div>
+                <div class="scanner-progress-bar mt-2">
+                  <div class="scanner-progress-fill"></div>
+                </div>
+              </div>
+
+              <div id="photo-scanned-items">
+                <!-- Bounding box matches -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: RECIPE DETAILED INSTRUCTIONS VIEW -->
+  <div class="modal-overlay" id="recipe-detail-modal">
+    <div class="modal-content" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3 class="mb-0 text-light" id="recipe-modal-title">Recipe Details</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Recipe Summary -->
+        <p class="text-secondary" id="recipe-modal-desc"></p>
+        <div class="d-flex gap-3 mb-4 text-secondary small bg-dark p-2 rounded">
+          <span>🕒 Ready In: <strong class="text-light" id="recipe-modal-time">15 mins</strong></span>
+          <span>⚡ Difficulty: <strong class="text-light" id="recipe-modal-diff">Easy</strong></span>
+          <span class="text-success">🍃 CO₂ Avoided: <strong id="recipe-modal-co2">1.8 kg</strong></span>
+        </div>
+
+        <!-- Ingredients Checklist -->
+        <h4 class="mb-2 text-light border-bottom pb-1" style="font-size: 1.1rem;">Ingredients Needed</h4>
+        <ul class="recipe-ing-list" id="recipe-modal-ingredients">
+          <!-- Loaded by recipes.js -->
+        </ul>
+
+        <!-- Cooking Steps -->
+        <h4 class="mb-2 text-light border-bottom pb-1" style="font-size: 1.1rem;">Directions</h4>
+        <ol class="recipe-steps-list" id="recipe-modal-steps">
+          <!-- Loaded by recipes.js -->
+        </ol>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-add-recipe-missing">Add Missing to Shopping List</button>
+        <button class="btn btn-primary" id="btn-cook-recipe">Cook Recipe & Deduct Pantry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: IMPORT CHECKED ITEMS FROM SHOPPING LIST -->
+  <div class="modal-overlay" id="shopping-import-modal">
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3 class="mb-0 text-light">Import Selected Ingredients</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="small text-secondary mb-3">Assign categories and set expiry dates for items bought to track them properly in your pantry.</p>
+        <div id="import-modal-items">
+          <!-- List of shopping list items to assign fields -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary modal-close">Cancel</button>
+        <button class="btn btn-primary" id="btn-confirm-import-shopping">Stock into Pantry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Import core scripts as ES modules -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "ai-food-waste-reduction-agent",
+  "version": "1.0.0",
+  "description": "An AI-powered household food waste reduction agent that tracks inventory, shelf-life, recipes, shopping lists, and environmental impact.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "food-waste",
+    "sustainability",
+    "household-pantry",
+    "ai-recipe-finder",
+    "eco-tracking"
+  ],
+  "author": "ZeroWaste AI Team",
+  "license": "MIT"
+}
